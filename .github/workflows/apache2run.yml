@@ -24,10 +24,10 @@ jobs:
       - name: build & push
         uses: docker/build-push-action@v6
         with:
-          context:
+          context: .
           push: true
           tags: 8ha5kar/apache2run:latest
-          file: apache2run
+          file: ./apache2run
         
 
           
