@@ -1,0 +1,23 @@
+---
+
+- name: apache2run
+  hosts: localhost
+  #become: true
+  tasks:
+  
+    # - name: install docker
+    #   apt:
+    #     name: docker.io
+    #     state: present
+
+    # - name: docker restart
+    #   systemd_service:
+    #     name: docker
+    #     state: restarted
+
+
+    - name: pull image and start container
+      shell: |
+        docker pull 8ha5kar/apache2run:latest
+        docker run -dt --name apache2run -p 8080:80 8ha5kar/apache2run:latest
+        
