@@ -4,7 +4,7 @@ on:
 
 jobs:
   build_docker_image:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -28,6 +28,22 @@ jobs:
           push: true
           tags: 8ha5kar/apache2run:latest
           file: ./apache2run
+
+  invoke_ans_playbook:
+    needs: build_docker_image
+    runs-on: self-hosted
+
+    steps:
+    
+      - name: change directory
+        working_directory: /home/bha5kar/workspace/ansible
+        run: |
+          sh start_nodes.sh
+          sleep 10
+          ansible-playbook apache2run.yml
+          echo "The app is running on http://$(hostname -i):8080 <selfhosted>"
+
+
         
 
           
