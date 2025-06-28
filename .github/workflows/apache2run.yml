@@ -13,7 +13,7 @@ jobs:
         uses: docker/loginaction@v3
         with:
           username: 8ha5kar
-          password: {{ secrets.DOCKERHUB_PAT }}
+          password: ${{ secrets.DOCKERHUB_PAT }}
 
       - name: setup QEMU #emulator 
         uses: docker/setup-qemu-action@v3
