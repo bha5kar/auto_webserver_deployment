@@ -1,5 +1,8 @@
 name: build docker image and push to dockerhub
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -39,8 +42,6 @@ jobs:
     
       - name: invoke  playbook
         run: |
-          sh start_nodes.sh
-          sleep 10
           ansible-playbook apache2run.yml
           echo "The app is running on http://$(hostname -i):8080 <selfhosted>"
 
