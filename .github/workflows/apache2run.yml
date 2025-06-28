@@ -1,0 +1,33 @@
+name: build docker image and push to dockerhub
+on:
+  workflow_dispatch:
+
+jobs:
+  build_docker_image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: login to dockerhub
+        uses: docker/loginaction@v3
+        with:
+          username: 8ha5kar
+          password: {{ secrets.DOCKERHUB_PAT }}
+
+      - name: setup QEMU #emulator 
+        uses: docker/setup-qemu-action@v3
+
+      - name: setup build
+        uses: docker/setup-buildx-action@v3
+
+      - name: build & push
+        uses: docker/build-push-action@v6
+        with:
+          context:
+          push: true
+          tags: 8ha5kar/apache2run:latest
+          file: apache2run
+        
+
+          
